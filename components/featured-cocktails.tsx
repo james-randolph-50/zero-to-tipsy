@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { recipes } from "@/lib/recipes"
+import { getRecipes } from "@/lib/recipes"
 import RecipeCard from "./recipe-card"
 
-export default function FeaturedCocktails() {
+export default async function FeaturedCocktails() {
+  const recipes = await getRecipes()
   const featured = recipes.slice(0, 3)
 
   return (

@@ -35,17 +35,17 @@ function multiplyIngredient(ingredient: string, multiplier: number): string {
 }
 
 export default function IngredientsSection({ ingredients }: IngredientsSectionProps) {
-  const [multiplier, setMultiplier] = useState(1)
+  // const [multiplier, setMultiplier] = useState(1)
 
-  const increment = () => setMultiplier((m) => m + 1)
-  const decrement = () => setMultiplier((m) => (m > 1 ? m - 1 : 1))
+  // const increment = () => setMultiplier((m) => m + 1)
+  // const decrement = () => setMultiplier((m) => (m > 1 ? m - 1 : 1))
 
   return (
     <div className="mb-12">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-display font-bold">Ingredients</h2>
 
-        <div className="flex items-center gap-3 bg-orange-100 rounded-lg p-3">
+        {/* <div className="flex items-center gap-3 bg-orange-100 rounded-lg p-3">
           <button
             onClick={decrement}
             disabled={multiplier === 1}
@@ -62,8 +62,8 @@ export default function IngredientsSection({ ingredients }: IngredientsSectionPr
           >
             <Plus size={20} className="text-orange-600" />
           </button>
-        </div>
-      </div>
+        </div>*/}
+      </div> 
 
       <ul className="space-y-3">
         {ingredients.map((ingredient, idx) => (
@@ -71,7 +71,7 @@ export default function IngredientsSection({ ingredients }: IngredientsSectionPr
             <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 text-white text-sm font-bold flex-shrink-0 mt-0.5">
               ✓
             </span>
-            <span className="text-gray-700">{multiplyIngredient(ingredient, multiplier)}</span>
+            <span className="text-gray-700">{(ingredient)}</span>
           </li>
         ))}
       </ul>

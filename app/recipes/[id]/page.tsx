@@ -1,4 +1,5 @@
-import { recipes } from "@/lib/recipes"
+import { getRecipes } from "@/lib/recipes"
+import { flattenRichTextList } from "@/lib/recipes"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
@@ -11,6 +12,7 @@ interface RecipePageProps {
 }
 
 export async function generateStaticParams() {
+  const recipes = await getRecipes()
   return recipes.map((recipe) => ({
     id: recipe.id,
   }))
@@ -18,15 +20,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: RecipePageProps) {
   const resolvedParams = await params
+  const recipes = await getRecipes()
   const recipe = recipes.find((r) => r.id === resolvedParams.id)
   return {
-    title: recipe ? `${recipe.name} - Craft Cocktails` : "Recipe Not Found",
+    title: recipe ? `${recipe.title || "Recipe"} - Craft Cocktails` : "Recipe Not Found",
     description: recipe?.description,
   }
 }
 
 export default async function RecipePage({ params }: RecipePageProps) {
   const resolvedParams = await params
+  const recipes = await getRecipes()
   const recipe = recipes.find((r) => r.id === resolvedParams.id)
 
   if (!recipe) {
@@ -54,14 +58,14 @@ export default async function RecipePage({ params }: RecipePageProps) {
         <section className="py-12 md:py-16 bg-background">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Title above image and video */}
-            <h1 className="text-5xl md:text-6xl font-display font-bold mb-8 text-balance">{recipe.name}</h1>
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-8 text-balance">{recipe.title || "Recipe"}</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               {/* Image and Video */}
               <div className="space-y-6">
                 <img
                   src={recipe.image || "/placeholder.svg"}
-                  alt={recipe.name}
+                  alt={recipe.title || "Recipe"}
                   className="w-full rounded-xl shadow-lg object-cover aspect-square"
                 />
 
@@ -73,7 +77,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
                         width="100%"
                         height="100%"
                         src={recipe.videoUrl}
-                        title={`${recipe.name} Tutorial`}
+                        title={`${recipe.title || "Recipe"} Tutorial`}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -87,14 +91,14 @@ export default async function RecipePage({ params }: RecipePageProps) {
               <div className="space-y-8">
                 {/* Ingredients */}
                 <div>
-                  <IngredientsSection ingredients={recipe.ingredients} />
+                  <IngredientsSection ingredients={flattenRichTextList(recipe.ingredients)} />
                 </div>
 
                 {/* Instructions */}
                 <div>
                   <h2 className="text-3xl font-display font-bold mb-6">Instructions</h2>
                   <ol className="space-y-4">
-                    {recipe.instructions.map((instruction, idx) => (
+                    {flattenRichTextList(recipe.instructions).map((instruction, idx) => (
                       <li key={idx} className="flex gap-4">
                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex-shrink-0">
                           {idx + 1}
@@ -135,12 +139,12 @@ export default async function RecipePage({ params }: RecipePageProps) {
                         <div className="h-40 bg-gradient-to-br from-orange-300 to-yellow-400 overflow-hidden">
                           <img
                             src={related.image || "/placeholder.svg"}
-                            alt={related.name}
+                            alt={related.title || "Recipe"}
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="p-4">
-                          <h3 className="font-display font-bold mb-1">{related.name}</h3>
+                          <h3 className="font-display font-bold mb-1">{related.title || "Recipe"}</h3>
                           <p className="text-sm text-gray-600">{related.description}</p>
                         </div>
                       </div>

@@ -1,10 +1,12 @@
 import Link from "next/link"
-import { recipes } from "@/lib/recipes"
+import { getRecipes } from "@/lib/recipes"
 import RecipeCard from "@/components/recipe-card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 
-export default function RecipesPage() {
+export default async function RecipesPage() {
+
+  const recipes = await getRecipes()
   return (
     <>
       <Header />
