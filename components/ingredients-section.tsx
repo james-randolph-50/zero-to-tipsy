@@ -62,8 +62,8 @@ export default function IngredientsSection({ ingredients }: IngredientsSectionPr
           >
             <Plus size={20} className="text-orange-600" />
           </button>
-        </div>*/}
-      </div> 
+        </div> */}
+      </div>
 
       <ul className="space-y-3">
         {ingredients.map((ingredient, idx) => (
@@ -71,6 +71,7 @@ export default function IngredientsSection({ ingredients }: IngredientsSectionPr
             <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 text-white text-sm font-bold flex-shrink-0 mt-0.5">
               ✓
             </span>
+            {/* <span className="text-gray-700">{multiplyIngredient(ingredient, multiplier)}</span> */}
             <span className="text-gray-700">{(ingredient)}</span>
           </li>
         ))}
