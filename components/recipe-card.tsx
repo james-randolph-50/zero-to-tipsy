@@ -13,7 +13,7 @@ export default function RecipeCard({ recipe, featured = false }: RecipeCardProps
         <div className="relative h-64 bg-gradient-to-br from-orange-300 via-yellow-300 to-orange-400 overflow-hidden">
           <img
             src={recipe.image || "/placeholder.svg"}
-            alt={recipe.name}
+            alt={recipe.title || "Recipe"}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -26,7 +26,7 @@ export default function RecipeCard({ recipe, featured = false }: RecipeCardProps
             </span>
           </div>
 
-          <h3 className="text-xl font-display font-bold mb-2">{recipe.name}</h3>
+          <h3 className="text-xl font-display font-bold mb-2">{recipe.title || "Recipe"}</h3>
 
           <p className="text-gray-600 text-sm mb-4 flex-grow">{recipe.description}</p>
         </div>
