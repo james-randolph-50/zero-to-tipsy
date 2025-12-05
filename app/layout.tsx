@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const _fredoka = Fredoka({ subsets: ["latin"], variable: "--font-display" })
-const _poppins = Poppins({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "Craft Cocktails - Signature Recipes",
@@ -36,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${_fredoka.variable} ${_poppins.variable}`}>
+    <html lang="en" className={`${_fredoka.variable} `}>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
