@@ -15,7 +15,7 @@ export default function Header() {
             <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
               🍹
             </div>
-            <span className="font-display text-xl font-bold text-gray-900">Craft Cocktails</span>
+            <span className="font-display text-xl font-bold text-gray-900">Zero to Tipsy</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -23,9 +23,9 @@ export default function Header() {
             <Link href="/recipes" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
               Recipes
             </Link>
-            <Link href="#" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
+            {/* <Link href="#" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
               About
-            </Link>
+            </Link> */}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -40,9 +40,9 @@ export default function Header() {
             <Link href="/recipes" className="text-gray-700 hover:text-orange-500 font-medium py-2">
               Recipes
             </Link>
-            <Link href="#" className="text-gray-700 hover:text-orange-500 font-medium py-2">
+            {/* <Link href="#" className="text-gray-700 hover:text-orange-500 font-medium py-2">
               About
-            </Link>
+            </Link> */}
           </nav>
         )}
       </div>
