@@ -20,11 +20,18 @@ export async function getRecipes(): Promise<Recipe[]> {
   console.log(data);
 
   return data.data.map((item: any): Recipe => {
+
+    const imageUrl =
+    item.image?.formats?.medium?.url ||
+    item.image?.formats?.small?.url ||
+    item.image?.url ||  // fallback to original image
+    "";
+
     return {
       id: String(item.id),
       title: item.title,
       description: item.description,
-      image: "",
+      image: imageUrl,
 
       category: (item.category.charAt(0).toUpperCase() + item.category.slice(1)) as Recipe["category"],
 
